@@ -1,7 +1,9 @@
 package journal.jash.Journal_APP.Controller;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,7 @@ private JournalEntryService journalEntryService;
 @PostMapping("/createRecords")
 public ResponseEntity<String> createRecord(@RequestBody JournalApp myentry) {
     try {
+        myentry.setDate(LocalDateTime.now());
         journalEntryService.saveEntry(myentry);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -41,22 +44,18 @@ public List<JournalApp> getallrecords(){
    return journalEntryService.getAllEntries();
 }
 
-// @GetMapping("/id/{id}")
-// public JournalApp getrecordsbyID(@PathVariable Integer id){
-//     return journals.get(id);
+@GetMapping("/id/{id}")
+public JournalApp getrecordsbyID(@PathVariable ObjectId id){
+  return journalEntryService.getEntryByID(id).orElse(null);
 
-// }
+}
 
 
-// @DeleteMapping("/id/{id}")
-// public String deletebyid(@PathVariable Integer id){
-//     if(journals.containsKey(id)){
-//         journals.remove(id);
-//     return "Record Deleted";
-//     }else{
-//         return "Record not found";
-//     }
-// }
+@DeleteMapping("/id/{id}")
+public void deletebyid(@PathVariable ObjectId id){
+    journalEntryService.deletebyid(id);
+
+}
 
 
 

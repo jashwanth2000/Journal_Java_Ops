@@ -17,9 +17,15 @@ public class JournalApp {
 private ObjectId id;
 private String notes;
 private String ref;
-private Date date;
+private LocalDateTime date;
 //private LocalDateTime ukTime = LocalDateTime.now(ZoneId.of("Europe/London"));  other countries if required;
 
+public LocalDateTime getDate() {
+    return date;
+}
+public void setDate(LocalDateTime date) {
+    this.date = date;
+}
 public ObjectId getId() {
     return id;
 }
@@ -38,11 +44,6 @@ public String getRef() {
 public void setRef(String ref) {
     this.ref = ref;
 }
-public Date getDate() {
-    return date;
-}
-public void setDate(Date date) {
-    this.date = date;
-} 
+
 
 }
