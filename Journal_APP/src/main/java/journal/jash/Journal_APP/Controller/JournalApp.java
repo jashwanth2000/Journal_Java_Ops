@@ -1,16 +1,31 @@
 package journal.jash.Journal_APP.Controller;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
+
+
+@Document
 public class JournalApp {
-    
-private Integer id;
+  
+ @Id   
+private ObjectId id;
 private String notes;
 private String ref;
-public Integer getId() {
+private Date date;
+//private LocalDateTime ukTime = LocalDateTime.now(ZoneId.of("Europe/London"));  other countries if required;
+
+public ObjectId getId() {
     return id;
 }
-public void setId(Integer id) {
+ public void setId(ObjectId id) {
     this.id = id;
-}
+ }
 public String getNotes() {
     return notes;
 }
@@ -23,6 +38,11 @@ public String getRef() {
 public void setRef(String ref) {
     this.ref = ref;
 }
-
+public Date getDate() {
+    return date;
+}
+public void setDate(Date date) {
+    this.date = date;
+} 
 
 }
