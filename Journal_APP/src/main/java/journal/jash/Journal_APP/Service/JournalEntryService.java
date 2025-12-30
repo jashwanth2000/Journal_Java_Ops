@@ -32,3 +32,6 @@ public void deletebyid(ObjectId id){
 JournalEntryRepository.deleteById(id);
 
 }
+
+
+}
