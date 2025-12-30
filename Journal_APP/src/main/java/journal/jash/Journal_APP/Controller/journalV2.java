@@ -62,7 +62,7 @@ public void deletebyid(@PathVariable ObjectId id){
 @PutMapping("/update/{id}")
 public ResponseEntity<String> updateRecord(
         @RequestBody JournalApp updatedEntry,
-        @PathVariable ObjectId id) 
+    @PathVariable ObjectId id) {
         
 
                 JournalApp oldEntry = journalEntryService.getEntryByID(id).orElse(null);
@@ -87,6 +87,9 @@ public ResponseEntity<String> updateRecord(
 
     return ResponseEntity
             .ok("Success: record updated");
+
+
+}
 
 
 }
