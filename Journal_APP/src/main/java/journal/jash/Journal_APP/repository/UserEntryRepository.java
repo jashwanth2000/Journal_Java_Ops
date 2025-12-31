@@ -4,11 +4,11 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 
-import journal.jash.Journal_APP.Entity.JournalEntries;
+import journal.jash.Journal_APP.Entity.User;
 
 @Component
-public interface JournalEntryRepository extends MongoRepository<JournalEntries,ObjectId>  {
+public interface UserEntryRepository extends MongoRepository<User,ObjectId>  {
 
-
-    //MongoRepository<classname, primary key type>
+public User findByUsername(String username);
+   
 }
