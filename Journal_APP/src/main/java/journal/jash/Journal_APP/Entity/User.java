@@ -18,7 +18,7 @@ public class User {
   
     @Id
     private ObjectId id;
-    @Indexed(unique=true) //indexing wont happen automatically by this line in application.properties you need to enable
+    @Indexed(unique=true) //indexing wont happen automatically by this line ,in application.properties you need to enable it.
     @NonNull
     private String username;
     @NonNull

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import journal.jash.Journal_APP.Entity.JournalEntries;
+import journal.jash.Journal_APP.Entity.User;
 import journal.jash.Journal_APP.Service.JournalEntryService;
+import journal.jash.Journal_APP.Service.UserService;
 
 @RestController
 @RequestMapping("/journal")
@@ -25,11 +27,15 @@ public class journalV2 {
 @Autowired
 private JournalEntryService journalEntryService;
 
-@PostMapping("/createRecords")
-public ResponseEntity<String> createRecord(@RequestBody JournalEntries myentry) {
+@Autowired
+private UserService userService;
+
+@PostMapping("/createRecords/{username}")
+public ResponseEntity<String> createRecord(@RequestBody JournalEntries myentry, @PathVariable String username) {
     try {
+        
         myentry.setDate(LocalDateTime.now());
-        journalEntryService.saveEntry(myentry);
+        journalEntryService.saveEntry(myentry,username);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body("Success: record added");
@@ -40,9 +46,11 @@ public ResponseEntity<String> createRecord(@RequestBody JournalEntries myentry) 
     }
 }
 
-@GetMapping("/getAllEntries")
-public ResponseEntity<List<JournalEntries>> getAllRecords(){
-  try{ List<JournalEntries> entries =journalEntryService.getAllEntries();
+@GetMapping("/getAllEntries/{username}")
+public ResponseEntity<List<JournalEntries>> getAllRecordsOfUser(@PathVariable String username){
+    User user =userService.userfindbyusername(username);
+    System.out.println("found"+username);
+  try{ List<JournalEntries> entries =user.getJournalEntries();
         if(entries.isEmpty()){
             return ResponseEntity.noContent().build();
         }
@@ -73,10 +81,10 @@ public ResponseEntity<JournalEntries> getrecordsbyID(@PathVariable ObjectId id){
 }
 
 
-@DeleteMapping("/id/{id}")
-public ResponseEntity<Void> deletebyid(@PathVariable ObjectId id){
+@DeleteMapping("/id/{username}/{id}")
+public ResponseEntity<Void> deletebyid(@PathVariable ObjectId id,@PathVariable String username){
     try{
-        journalEntryService.deletebyid(id);
+        journalEntryService.deletebyid(id,username);
         return ResponseEntity.ok().build();
     }catch(Exception e){                    
        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();    
