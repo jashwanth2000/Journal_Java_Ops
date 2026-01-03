@@ -10,5 +10,6 @@ import journal.jash.Journal_APP.Entity.User;
 public interface UserEntryRepository extends MongoRepository<User,ObjectId>  {
 
 public User findByUsername(String username);
-   
+   //findByUsername is a query method provided by spring data mongodb to find user by username field
+
 }

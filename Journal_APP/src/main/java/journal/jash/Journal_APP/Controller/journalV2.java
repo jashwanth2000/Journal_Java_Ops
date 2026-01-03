@@ -46,7 +46,7 @@ public ResponseEntity<String> createRecord(@RequestBody JournalEntries myentry, 
     }
 }
 
-@GetMapping("/getAllEntries/{username}")
+@GetMapping("/getAllRecordsOfUser/{username}")
 public ResponseEntity<List<JournalEntries>> getAllRecordsOfUser(@PathVariable String username){
     User user =userService.userfindbyusername(username);
     System.out.println("found"+username);

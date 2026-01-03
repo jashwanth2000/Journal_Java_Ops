@@ -6,9 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
-import lombok.Data;
-
-
 import java.time.LocalDateTime;
 
 

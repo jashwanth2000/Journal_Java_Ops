@@ -18,7 +18,7 @@ public class JournalAppApplication {
 		
 	}
 
-	@Bean //needed for implementation for transactional
+	@Bean //this is needed for implementation for transactional annotations
 	public PlatformTransactionManager manage(MongoDatabaseFactory db){
 		return new MongoTransactionManager(db) ;
 	}

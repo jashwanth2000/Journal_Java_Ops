@@ -10,6 +10,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 
 @Document(collection="users")
@@ -25,6 +29,16 @@ public class User {
     private String password;
     @DBRef
     private List<JournalEntries> journalEntries =new ArrayList<>() ;
+
+    private List<String> roles ;
+
+    
+    public List<String> getRoles() {
+        return roles;
+    }
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
     public ObjectId getId() {
         return id;
     }
